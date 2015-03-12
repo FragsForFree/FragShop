@@ -1,0 +1,12 @@
+name: FragShop
+main: com.github.fragsforfree.FragShop
+version: 0.0.1-SNAPSHOT
+author: FragsForFree
+commands:
+  fragshop:
+    description: This are the fragshop commands
+    usage: /fragshop help
+permissions:
+  fragshop.repair:
+    desciption: user can use the repair commands.
+    default: op
