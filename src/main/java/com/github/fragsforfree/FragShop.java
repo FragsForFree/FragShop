@@ -41,12 +41,12 @@ public class FragShop extends JavaPlugin{
     	}
     	else
     	{
-    		MessageHandler.sendPlayerMessage(player, "you need to hold the item in your hand, you like to repair", true);
+    		MessageHandler.sendPlayerMessage(player, "you need to hold the item in your hand, you like to repair " + player.getItemInHand().getType().toString(), true);
     	}
     }
     
     public void prepareBuyItem(Player player, String item, String value, boolean showcosts){    	    	
-    	Material material = Material.getMaterial(item);
+    	Material material = Material.getMaterial(item.toUpperCase());
         if (isNumeric(value) && (material != null)) {
         	this.shop.buy(player, material, Short.valueOf(value), showcosts);
     	}
@@ -58,7 +58,7 @@ public class FragShop extends JavaPlugin{
     }
     
     private boolean isMaterialInHand(Player player){
-    	Material material = Material.getMaterial(player.getItemInHand().toString());
+    	Material material = Material.getMaterial(player.getItemInHand().getType().toString());
     	if (material != null) {return true;}
     	return false;
     }

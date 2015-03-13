@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.fragsforfree</groupId>
   <artifactId>FragShop</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>FragShop</name>
   <description>a very easy shopping system</description>
   

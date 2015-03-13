@@ -30,43 +30,46 @@ public class FragShopCommandExecuter implements CommandExecutor{
 					if(sender.hasPermission(EnumPermissions.FragShopRepair.toString())){
 					
 						if (args[0].toLowerCase().equalsIgnoreCase("repair-cost")){				   				   			
-				   			sender.sendMessage(ChatColor.GOLD + "Command" + ChatColor.WHITE + " repair-cost found!");
 				   			this.plugin.prepareRepair((Player) sender, true);
+				   			return true;
 				   		}
 				   		
 				   		if (args[0].toLowerCase().equalsIgnoreCase("repair")){			   			
-				   			sender.sendMessage(ChatColor.GOLD + "Command" + ChatColor.WHITE + " repair found!");
 				   			this.plugin.prepareRepair((Player) sender, false);
+				   			return true;
 				   		}
 				   		
 				   	}
 					else
 					{
 						this.sendHelp((Player) sender);
+						return true;
 					}					
 				
 				case 3:	
 					
 					if(sender.hasPermission(EnumPermissions.FragShopShop.toString())){	
 					
-						if (args[0].toLowerCase().equalsIgnoreCase("buy-item")){																					
-							sender.sendMessage(ChatColor.GOLD + "Command" + ChatColor.WHITE + " buy-item found!");							
+						if (args[0].toLowerCase().equalsIgnoreCase("buy-item")){																										
 							this.plugin.prepareBuyItem((Player) sender, args[1], args[2], false);
+							return true;
 						}
 
-						if (args[0].toLowerCase().equalsIgnoreCase("buy-item-cost")){																					
-							sender.sendMessage(ChatColor.GOLD + "Command" + ChatColor.WHITE + " buy-item-cost found!");							
+						if (args[0].toLowerCase().equalsIgnoreCase("buy-item-cost")){																												
 							this.plugin.prepareBuyItem((Player) sender, args[1], args[2], true);
+							return true;
 						}						
 						
 					}
 					else
 					{
 						this.sendHelp((Player) sender);
+						return true;
 					}
 					
 		    	default:
-		    		this.sendHelp((Player) sender);   
+		    		this.sendHelp((Player) sender); 
+		    		return true;
 			
 			}
 		}

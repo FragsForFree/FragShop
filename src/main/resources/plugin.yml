@@ -1,6 +1,6 @@
 name: FragShop
 main: com.github.fragsforfree.FragShop
-version: 0.0.1-SNAPSHOT
+version: 0.0.1
 author: FragsForFree
 commands:
   fragshop:
