@@ -1,10 +1,10 @@
 package com.github.fragsforfree.repair;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.fragsforfree.FragShop;
+import com.github.fragsforfree.messages.MessageHandler;
 
 public class RepairShop {
 
@@ -13,39 +13,35 @@ public class RepairShop {
 	public RepairShop(FragShop plugin) {
 		this.plugin = plugin;
 	}
-	
-	public void commandrepaircost(Player player){		
 		
+	public void commandrepair(Player player, boolean showcosts){		
 		ItemStack item = player.getItemInHand();
 		if (this.isTool(item) || this.isArmor(item)){
+			
+			int enchantments = item.getEnchantments().size();				
 			short repairdurability = this.getdurabilitytorepair(item);
-			player.sendMessage(ChatColor.GOLD + "Repair-Cost" + ChatColor.WHITE + " durability is " + repairdurability);
-		}
-		else
-		{
-			player.sendMessage(ChatColor.GOLD + "Repair-Cost" + ChatColor.WHITE + " wrong item!");
-		}
-
-	}
-	
-	public void commandrepair(Player player){
-		ItemStack item = player.getItemInHand();
-		if (this.isTool(item) || this.isArmor(item)){
-			short repairdurability = this.getdurabilitytorepair(item);
-			if (plugin.economyhandler.doesPlayerHaveEnough(player, repairdurability)){
-				plugin.economyhandler.withdraw(player, repairdurability);
-				player.getItemInHand().setDurability((short) 0);
-				player.updateInventory();
-				player.sendMessage(ChatColor.GOLD + "Repair-Cost" + ChatColor.WHITE + " item was repaired for " + repairdurability);
+			double price = repairdurability + (enchantments * (repairdurability / 10));
+			
+			if (showcosts == false) {
+				if (plugin.economyhandler.doesPlayerHaveEnough(player, price)){
+					plugin.economyhandler.withdraw(player, price);
+					player.getItemInHand().setDurability((short) 0);
+					this.updateInventory(player);
+					MessageHandler.sendPlayerMessage(player, "repaired your item for " + this.plugin.economyhandler.formatCost(price), false);
+				}
+				else
+				{
+					MessageHandler.sendPlayerMessage(player, "you do not have enought money!", true);
+				}
 			}
 			else
 			{
-				player.sendMessage(ChatColor.GOLD + "Repair-Cost" + ChatColor.WHITE + " you do not have enough money: " + repairdurability);
+				MessageHandler.sendPlayerMessage(player, "the repair costs " + this.plugin.economyhandler.formatCost(price), false);
 			}
 		}
 		else
 		{
-			player.sendMessage(ChatColor.GOLD + "Repair-Cost" + ChatColor.WHITE + " wrong item!");
+			MessageHandler.sendPlayerMessage(player, "cannot repair your item!", true);
 		}		
 	}
 	
@@ -55,9 +51,14 @@ public class RepairShop {
 			return (short) (itemdurability);
 		}
 		return 0;
+	}	
+	
+	@SuppressWarnings("deprecation")
+	private void updateInventory(Player player){
+		player.updateInventory();
 	}
 	
-	public boolean isTool(ItemStack item) {
+	private boolean isTool(ItemStack item) {
 		switch (item.getType()) {
 		case WOOD_PICKAXE:
 		case WOOD_SPADE:
@@ -94,7 +95,7 @@ public class RepairShop {
 		}
 	}
 
-	public boolean isArmor(ItemStack item) {
+	private boolean isArmor(ItemStack item) {
 		switch (item.getType()) {
 		case LEATHER_HELMET:
 		case LEATHER_CHESTPLATE:

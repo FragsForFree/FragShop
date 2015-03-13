@@ -1,7 +1,8 @@
 package com.github.fragsforfree.permission;
 
 public enum EnumPermissions {
-	FragShopRepair("fragshop.repair")
+	FragShopRepair("fragshop.repair"),
+	FragShopShop("fragshop.shop")
     ;
 
     private final String text;

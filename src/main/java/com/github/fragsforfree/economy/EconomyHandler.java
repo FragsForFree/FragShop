@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 import com.github.fragsforfree.FragShop;
+import com.github.fragsforfree.messages.MessageHandler;
 
 public class EconomyHandler {
 
@@ -18,28 +19,36 @@ public class EconomyHandler {
 		this.plugin = plugin;
 		
 		// Setup Vault
-		RegisteredServiceProvider<Economy> economyProvider = plugin.getServer().getServicesManager().getRegistration(
+		RegisteredServiceProvider<Economy> economyProvider = this.plugin.getServer().getServicesManager().getRegistration(
 				Economy.class);
 		if (economyProvider != null)
 			economy = economyProvider.getProvider();
 		else {
 			// Disable if no economy plugin was found
-			plugin.getServer().getLogger().log(Level.SEVERE, "Failed to load an economy plugin. Disabling...");
-			plugin.getServer().getPluginManager().disablePlugin(plugin);
+			this.plugin.getServer().getLogger().log(Level.SEVERE, "Failed to load an economy plugin. Disabling...");
+			this.plugin.getServer().getPluginManager().disablePlugin(this.plugin);
 			return;
 		}
 	}
 	
 	
-	public boolean doesPlayerHaveEnough(Player player, short money) {
-		return economy.getBalance(player.getName()) - money >= 0;
+	public boolean doesPlayerHaveEnough(Player player, double money) {
+		return economy.getBalance(player) - money >= 0;
 	}
 
-	public String formatCost(short money) {
+	public String formatCost(double money) {
 		return economy.format(money);
 	}
 
-	public void withdraw(Player player, short money) {
-		economy.withdrawPlayer(player.getName(), money);
+	public void withdraw(Player player, double money) {
+		if (this.doesPlayerHaveEnough(player, money)){
+			economy.withdrawPlayer(player, money);
+			MessageHandler.sendPlayerMessage(player, "you pay " + this.formatCost(money), false);
+		}
+		else
+		{
+			MessageHandler.sendPlayerMessage(player, "you do not have enought money!", true);
+		}
+		
 	}
 }

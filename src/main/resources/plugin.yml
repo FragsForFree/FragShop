@@ -8,5 +8,8 @@ commands:
     usage: /fragshop help
 permissions:
   fragshop.repair:
-    desciption: user can use the repair commands.
+    description: user can use the repair commands.
     default: op
+  fragshop.shop:
+    description: user can use the buy commands.
+    default: op    
