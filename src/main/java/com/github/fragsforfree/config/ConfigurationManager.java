@@ -29,7 +29,7 @@ public class ConfigurationManager {
     	config.addDefault(EnumConfig.ADMIN_SHOP_ITEM_DIRT.getPath(), EnumConfig.ADMIN_SHOP_ITEM_DIRT.getDouble());
     	config.addDefault(EnumConfig.ADMIN_SHOP_ITEM_GLOWSTONE.getPath(), EnumConfig.ADMIN_SHOP_ITEM_GLOWSTONE.getDouble());
     	config.addDefault(EnumConfig.ADMIN_SHOP_ITEM_GOLD_INGOT.getPath(), EnumConfig.ADMIN_SHOP_ITEM_GOLD_INGOT.getDouble());
-    	config.addDefault(EnumConfig.ADMIN_SHOP_ITEM_DIAMONT.getPath(), EnumConfig.ADMIN_SHOP_ITEM_DIAMONT.getDouble());
+    	config.addDefault(EnumConfig.ADMIN_SHOP_ITEM_DIAMOND.getPath(), EnumConfig.ADMIN_SHOP_ITEM_DIAMOND.getDouble());
     	config.addDefault(EnumConfig.AMDIN_SHOP_ITEM_EMERALD.getPath(), EnumConfig.AMDIN_SHOP_ITEM_EMERALD.getDouble());
     	config.options().copyDefaults(true); 
     	plugin.saveConfig();

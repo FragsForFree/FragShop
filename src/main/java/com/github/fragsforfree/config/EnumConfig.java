@@ -8,7 +8,7 @@ public enum EnumConfig {
 	ADMIN_SHOP_ITEM_GLOWSTONE("Admin.Shop.Items.Glowstone", 5.0),
 	ADMIN_SHOP_ITEM_GOLD_INGOT("Admin.Shop.Items.Gold_Ingot", 28.0),
 	ADMIN_SHOP_ITEM_OBSIDIAN("Admin.Shop.Items.Obsidian", 4.0),
-	ADMIN_SHOP_ITEM_DIAMONT("Admin.Shop.Items.Diamont", 600.0),
+	ADMIN_SHOP_ITEM_DIAMOND("Admin.Shop.Items.Diamond", 600.0),
 	AMDIN_SHOP_ITEM_EMERALD("Admin.Shop.Items.Emerald", 1000.0);
 	
 	private String path;
