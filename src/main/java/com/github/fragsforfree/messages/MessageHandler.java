@@ -1,14 +1,21 @@
 package com.github.fragsforfree.messages;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import com.github.fragsforfree.command.EnumCommandhelp;
 
 public final class MessageHandler {
 
 	private MessageHandler(){
-		
+		 
+	}
+	
+	public static void sendConsole(Plugin plugin, Level loglvl, String Message){
+		plugin.getLogger().log(loglvl, Message);
 	}
 	
 	public static void sendPlayerMessage(Player player, String Message, boolean Error){

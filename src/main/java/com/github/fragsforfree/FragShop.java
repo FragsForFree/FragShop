@@ -4,9 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.fragsforfree.command.EnumCommandhelp;
+import com.github.fragsforfree.command.EnumCommandhelp; 
 import com.github.fragsforfree.command.FragShopCommandExecuter;
 import com.github.fragsforfree.economy.EconomyHandler;
+import com.github.fragsforfree.config.ConfigurationManager;
 import com.github.fragsforfree.messages.MessageHandler;
 import com.github.fragsforfree.repair.RepairShop;
 import com.github.fragsforfree.shop.Shop;
@@ -16,11 +17,13 @@ public class FragShop extends JavaPlugin{
 	private RepairShop repairshop;
 	public EconomyHandler economyhandler;
 	private Shop shop;
+	private ConfigurationManager configManager;
 	
 	/**
 	 * standard onEnable method
 	 */
-    public void onEnable(){    
+    public void onEnable(){
+    	this.configManager = new ConfigurationManager(this);
     	this.economyhandler = new EconomyHandler(this);
     	this.repairshop = new RepairShop(this);
     	this.shop = new Shop(this);
@@ -34,6 +37,10 @@ public class FragShop extends JavaPlugin{
      */
     public void onDisable(){ 
     }    
+    
+    public double getShopPrice(String materialname){
+    	return configManager.getShopPrice(materialname);
+    }
     
     public void prepareRepair(Player player, boolean showcosts){
     	if (this.isMaterialInHand(player)){
@@ -75,4 +82,8 @@ public class FragShop extends JavaPlugin{
       }  
       return true;  
     }
+
+	public void showMateriallist(Player sender) {
+		this.configManager.showMateriallist(sender);
+	}
 }

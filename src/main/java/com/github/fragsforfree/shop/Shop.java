@@ -24,22 +24,30 @@ public class Shop {
 				amount = maxstacksize;
 				MessageHandler.sendPlayerMessage(player, "your amount is set to the maxstacksize of " + maxstacksize, true);
 			}						
-			double price = (double) (amount * 10);
+			double price = (double) (amount * plugin.getShopPrice(material.name()));
 			
-			if (showcosts == false){			
-				if (plugin.economyhandler.doesPlayerHaveEnough(player, price)){
-					plugin.economyhandler.withdraw(player, price);
-					item.setAmount(amount);			
-					player.getInventory().addItem(item);										
+			if (price != 0){
+			
+				if (showcosts == false){			
+					if (plugin.economyhandler.doesPlayerHaveEnough(player, price)){
+						plugin.economyhandler.withdraw(player, price);
+						item.setAmount(amount);			
+						player.getInventory().addItem(item);										
+					}
+					else
+					{
+						MessageHandler.sendPlayerMessage(player, "you do not have enought money!", true);
+					}
 				}
 				else
 				{
-					MessageHandler.sendPlayerMessage(player, "you do not have enought money!", true);
+					MessageHandler.sendPlayerMessage(player, "to buy " + amount + " of " + material.name().toUpperCase() + " costs " + this.plugin.economyhandler.formatCost(price), false);
 				}
+				
 			}
 			else
 			{
-				MessageHandler.sendPlayerMessage(player, "to buy " + amount + " of " + item.toString() + " costs " + this.plugin.economyhandler.formatCost(price), false);
+				MessageHandler.sendPlayerMessage(player, "the material " + material.name().toUpperCase() + " is not on the selling list!", true);
 			}
 		}
 		else
