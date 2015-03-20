@@ -53,6 +53,17 @@ public class FragShopCommandExecuter implements CommandExecutor{
 					this.sendHelp((Player) sender);
 					return true;
 				
+				case 2:
+					
+					if(sender.hasPermission(EnumPermissions.FragShopAdmin.toString())){
+						
+						if (args[0].toLowerCase().equalsIgnoreCase("remove-item")){
+							this.plugin.deleteShopMaterial((Player) sender, args[1]);;
+							return true;
+						}
+						
+					}					
+					
 				case 3:	
 					
 					if(sender.hasPermission(EnumPermissions.FragShopShop.toString())){	
@@ -66,6 +77,15 @@ public class FragShopCommandExecuter implements CommandExecutor{
 							this.plugin.prepareBuyItem((Player) sender, args[1], args[2], true);
 							return true;
 						}						
+						
+					}
+					
+					if(sender.hasPermission(EnumPermissions.FragShopAdmin.toString())){
+						
+						if (args[0].toLowerCase().equalsIgnoreCase("set-item")){
+							this.plugin.addShopMaterial((Player) sender, args[1], args[2]);
+							return true;
+						}
 						
 					}
 					
@@ -94,6 +114,10 @@ public class FragShopCommandExecuter implements CommandExecutor{
 			player.sendMessage(ChatColor.GOLD + EnumCommandhelp.Cmd_Buy_Item.getCommand() + ChatColor.WHITE + EnumCommandhelp.Cmd_Buy_Item.getTip());
 			player.sendMessage(ChatColor.GOLD + EnumCommandhelp.Cmd_Buy_Item_Cost.getCommand() + ChatColor.WHITE + EnumCommandhelp.Cmd_Buy_Item_Cost.getTip());
 			player.sendMessage(ChatColor.GOLD + EnumCommandhelp.Cmd_Buy_Item_List.getCommand() + ChatColor.WHITE + EnumCommandhelp.Cmd_Buy_Item_List.getTip());
+		}
+		if (player.hasPermission(EnumPermissions.FragShopAdmin.toString())){
+			player.sendMessage(ChatColor.GOLD + EnumCommandhelp.Cmd_Set_Item.getCommand() + ChatColor.WHITE + EnumCommandhelp.Cmd_Set_Item.getTip());
+			player.sendMessage(ChatColor.GOLD + EnumCommandhelp.Cmd_Remove_Item.getCommand() + ChatColor.WHITE + EnumCommandhelp.Cmd_Remove_Item.getTip());
 		}
 	}
 	

@@ -3,17 +3,18 @@ package com.github.fragsforfree.config;
 import java.util.Set;
 import java.util.logging.Level;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
+import com.github.fragsforfree.FragShop;
 import com.github.fragsforfree.messages.MessageHandler;
 
 public class ConfigurationManager {
 
-	private final Plugin plugin;
+	private final FragShop plugin;
 	
-	public ConfigurationManager(Plugin plugin){
+	public ConfigurationManager(FragShop plugin){
 		this.plugin = plugin;
 		this.initialiseConfig();
 	}
@@ -78,6 +79,20 @@ public class ConfigurationManager {
     	}
     	MessageHandler.sendPlayerMessage(player, message, false);
 		
+	}
+	
+	public void addShopMaterial(Player player, Material material, double price){
+		if (!plugin.getConfig().contains("Admin.Shop.Items" + material.name().toUpperCase())){
+			plugin.getConfig().createSection("Admin.Shop.Items." + material.name().toUpperCase());
+		}
+		plugin.getConfig().set("Admin.Shop.Items." + material.name().toUpperCase(), price);
+		plugin.saveConfig();
+		MessageHandler.sendPlayerMessage(player, "the material is now buyable with " + this.plugin.economyhandler.formatCost(price), false);
+	}
+	
+	public void deleteShopMaterial(Player player, Material material){
+		plugin.getConfig().set("Admin.Shop.Items." + material.name().toUpperCase(), null);
+		MessageHandler.sendPlayerMessage(player, "delete the material from shopping list.", true);
 	}
 	
 }

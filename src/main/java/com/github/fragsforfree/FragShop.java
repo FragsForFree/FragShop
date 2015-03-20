@@ -83,7 +83,33 @@ public class FragShop extends JavaPlugin{
       return true;  
     }
 
+    private static boolean isMaterial(String str) {
+    	Material material = Material.getMaterial(str);
+		if (material != null) {return true;}
+		return false;
+	}
+    
 	public void showMateriallist(Player sender) {
 		this.configManager.showMateriallist(sender);
+	}
+	
+	public void addShopMaterial(Player player, String materialname, String price){
+		if (isNumeric(price) && (isMaterial(materialname))){
+			this.configManager.addShopMaterial(player, Material.getMaterial(materialname.toUpperCase()), Double.valueOf(price));
+		}
+		else
+		{
+			MessageHandler.sendPlayerMessage(player, "material or price is not valid", true);
+		}
+	}
+	
+	public void deleteShopMaterial(Player player, String materialname){
+		if (isMaterial(materialname)){
+			this.configManager.deleteShopMaterial(player, Material.getMaterial(materialname.toUpperCase()));
+		}
+		else
+		{
+			MessageHandler.sendPlayerMessage(player, "material is not valid", true);
+		}
 	}
 }

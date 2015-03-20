@@ -12,4 +12,7 @@ permissions:
     default: op
   fragshop.shop:
     description: user can use the buy commands.
-    default: op    
+    default: op
+  fragshop.admin:
+    description: user can use admin commands.
+    default: op
