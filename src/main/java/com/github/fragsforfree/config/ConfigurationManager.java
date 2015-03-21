@@ -82,7 +82,7 @@ public class ConfigurationManager {
 	}
 	
 	public void addShopMaterial(Player player, Material material, double price){
-		if (!plugin.getConfig().contains("Admin.Shop.Items" + material.name().toUpperCase())){
+		if (!plugin.getConfig().contains("Admin.Shop.Items." + material.name().toUpperCase())){
 			plugin.getConfig().createSection("Admin.Shop.Items." + material.name().toUpperCase());
 		}
 		plugin.getConfig().set("Admin.Shop.Items." + material.name().toUpperCase(), price);
@@ -91,8 +91,16 @@ public class ConfigurationManager {
 	}
 	
 	public void deleteShopMaterial(Player player, Material material){
-		plugin.getConfig().set("Admin.Shop.Items." + material.name().toUpperCase(), null);
-		MessageHandler.sendPlayerMessage(player, "delete the material from shopping list.", true);
+		if (!plugin.getConfig().contains("Admin.Shop.Items." + material.name().toUpperCase())){
+			MessageHandler.sendPlayerMessage(player, "the material is already not in shopping list.", true);
+		}
+		else
+		{
+			plugin.getConfig().set("Admin.Shop.Items." + material.name().toUpperCase(), null);
+			plugin.saveConfig();
+			MessageHandler.sendPlayerMessage(player, "delete the material from shopping list.", false);			
+		}
+
 	}
 	
 }
