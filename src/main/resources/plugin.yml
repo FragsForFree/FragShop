@@ -1,10 +1,10 @@
 name: FragShop
 main: com.github.fragsforfree.FragShop
-version: 0.2.0-Snaphot
+version: 0.2.0
 author: FragsForFree
 commands:
   fragshop:
-    description: This are the fragshop commands
+    description: easy commandline shop and item repair
     usage: /fragshop help
 permissions:
   fragshop.repair:

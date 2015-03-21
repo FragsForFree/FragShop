@@ -1,7 +1,7 @@
 package com.github.fragsforfree.command;
 
 public enum EnumCommandhelp {
-	TITLE("", "Plugin FragShop v0.2.0-Snaphot by FragsForFree"),
+	TITLE("", "Plugin FragShop v0.2.0 by FragsForFree"),
 	Cmd_Help("/fragshop help ", "shows this helppage"),
 	Cmd_Repair("/fragshop repair ", "repair your item in hand"),
 	Cmd_Repair_Cost("/fragshop repair-cost ", "show you the price to reparing your item in hand"),
